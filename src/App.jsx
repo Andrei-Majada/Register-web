@@ -1,10 +1,14 @@
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import Global from './styles/global';
+import Routes from './routes';
 
 const App = () => (
-  <>
+  <Router>
     <Global />
-    <h1>testando</h1>
-  </>
+    <Routes />
+  </Router>
 )
 
 export default App;
