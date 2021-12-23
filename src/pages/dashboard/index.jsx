@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from '../../components/button';
+import ListRow from '../../components/listRow';
 
 import {
   Wrapper,
@@ -30,11 +31,11 @@ const Dashboard = () => {
           <TableColumn>Hora</TableColumn>
         </Tableheader>
       <TableDiv>
-        <h1>tabelinha aqui</h1>
-        <h1>tabelinha aqui</h1>
-        <h1>tabelinha aqui</h1>
-        <h1>tabelinha aqui</h1>
-        <h1>tabelinha aqui</h1>
+        <ListRow />
+        <ListRow />
+        <ListRow />
+        <ListRow />
+        <ListRow />
       </TableDiv>
     </Wrapper>
   );

@@ -29,6 +29,7 @@ const TableDiv = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 0 50px 0 50px;
 `;
 
 const TableColumn = styled.h6`
@@ -36,6 +37,9 @@ const TableColumn = styled.h6`
   line-height: 34px;
   letter-spacing: 0.02em;
   color: #303030;
+  &:last-child{
+    margin-right: 40px;
+  }
 `;
 
 export {
