@@ -52,6 +52,8 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  width: 100%;
   cursor: pointer;
   ${({ variant }) => getVariantStyle(variant)}
 `;
