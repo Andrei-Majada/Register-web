@@ -1,11 +1,5 @@
 import { gql } from 'graphql-tag';
 
-export const hello = gql`
-  query {
-    hello
-  }
-`;
-
 export const LISTADMIN = gql`
   query ListAdminRegister {
     listAdminRegister {

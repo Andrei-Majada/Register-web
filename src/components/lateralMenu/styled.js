@@ -28,7 +28,6 @@ const Menu = styled.div`
 const MenuItem = styled(Link)`
   display: flex;
   align-items: center;
-  /* padding-left: 4px; */
   border-radius: 4px;
   width: 100%;
   height: 110px;

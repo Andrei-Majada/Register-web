@@ -2,8 +2,6 @@ import React from 'react';
 import {
   Switch,
   Route,
-  useLocation,
-  useHistory,
   Redirect,
 } from 'react-router-dom';
 
@@ -33,9 +31,7 @@ const privateRoutes = [
 ];
 
 const Routes = () => {
-  const history = useHistory();
-  const [userInfo, setUserInfo] = useAuth();
-  const location = useLocation();
+  const [userInfo] = useAuth();
 
   const renderPublicRoutes = () => (
     publicRoutes.map((routeConfig) => (
