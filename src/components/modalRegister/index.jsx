@@ -48,6 +48,11 @@ const ModalRequest = ({
     create({variables: { timeRegistered: timeString }})
   }
 
+  const formattedName = () => {
+    const re = /(\b[a-z](?!\s))/g;
+    return username.replace(re, (x) => x.toUpperCase());
+  };
+
   return (
     <ModalAll>
       <ModalDisplay>
@@ -57,7 +62,7 @@ const ModalRequest = ({
         <Line />
         <ModalBody>
           <PlaceholderName>Colaborador</PlaceholderName>
-          <NameDisplay>{username}</NameDisplay>
+          <NameDisplay>{formattedName()}</NameDisplay>
           <PlaceholderDateHour>Data/Hora</PlaceholderDateHour>
           <DateHourDisplay type="datetime-local" onChange={(e) => setTimeRegistered(e.target.value)}></DateHourDisplay>
           <ButtonsContainer>

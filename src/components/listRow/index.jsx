@@ -41,12 +41,17 @@ const ListRow = ({ register, index }) => {
     return indexFormatted;
   };
 
+  const formattedName = () => {
+    const re = /(\b[a-z](?!\s))/g;
+    return register.username.replace(re, (x) => x.toUpperCase());
+  };
+
   return (
     <Row>
       <GreenBar />
       <RowFormat>
         <Display>
-          <DisplayName>{register.username}</DisplayName>
+          <DisplayName>{formattedName()}</DisplayName>
           <DisplayCode>{handleIndex(index)}</DisplayCode>
         </Display>
         <DisplayDate>{handleDate(register.timeRegistered)}</DisplayDate>
