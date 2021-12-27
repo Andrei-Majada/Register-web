@@ -24,13 +24,13 @@ const ModalRequest = ({
 }) => {
   const [timeRegistered, setTimeRegistered] = useState('');
 
-  function getToken() {
-    let login = localStorage.getItem('userInfo');
-    let teste = JSON.parse(login)
+  const getToken = () => {
+    const login = localStorage.getItem('userInfo');
+    const teste = JSON.parse(login)
     return `Bearer ` + teste?.login?.token;
   }
 
-  const [create, { loading, error }] = useMutation(CREATEREGISTER, {
+  const [create] = useMutation(CREATEREGISTER, {
     context: {
       headers: {
         Authorization:  getToken(),

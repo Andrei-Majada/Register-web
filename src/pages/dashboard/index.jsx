@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from "@apollo/react-hooks";
+import { useHistory } from 'react-router-dom';
 
 import ListRow from '../../components/listRow';
 import { LISTADMIN } from  '../../graphql/queries';
+import verifyToken from  '../../validator';
 
 import {
   Wrapper,
@@ -12,21 +14,29 @@ import {
 } from './styled';
 
 const Dashboard = () => {
-  const [adminRegister, setAdminRgiester] = useState([]);
-  function getToken() {
-    let login = localStorage.getItem('userInfo');
-    let temp = JSON.parse(login)
+  const history = useHistory();
+  const [adminRegister, setAdminRegister] = useState([]);
+  const getToken = () => {
+    const login = localStorage.getItem('userInfo');
+    const temp = JSON.parse(login)
     return `Bearer ` + temp?.login?.token;
   }
 
-  const { loading, error } = useQuery(LISTADMIN, {
+  useQuery(LISTADMIN, {
     context: {
       headers: {
         Authorization:  getToken(),
       }
     },
     onCompleted: (data) => {
-      setAdminRgiester(data?.listAdminRegister);
+      setAdminRegister(data?.listAdminRegister);
+    },
+    onError: (err) => {
+      const invalidToken = verifyToken(getToken());
+      if (invalidToken) {
+        localStorage.removeItem('userInfo');
+        history.push("/login");
+      }
     },
     pollInterval: 2000,
   });

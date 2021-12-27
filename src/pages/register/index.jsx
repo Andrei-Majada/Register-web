@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from "@apollo/react-hooks";
+import { useHistory } from 'react-router-dom';
 
 import Button from '../../components/button';
 import ListRow from '../../components/listRow';
 import Modal from '../../components/modalRegister';
 import { LISTEMPLOYEE } from  '../../graphql/queries';
+import verifyToken from  '../../validator';
 
 import {
   Wrapper,
@@ -16,22 +18,23 @@ import {
 } from './styled';
 
 const Register = () => {
+  const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const [employeeRegister, setEmployeeRegister] = useState([]);
 
-  function getToken() {
-    let login = localStorage.getItem('userInfo');
-    let temp = JSON.parse(login)
+  const getToken = () => {
+    const login = localStorage.getItem('userInfo');
+    const temp = JSON.parse(login);
     return `Bearer ` + temp?.login?.token;
   }
 
-  function getName() {
-    let login = localStorage.getItem('userInfo');
-    let temp = JSON.parse(login)
+  const getName = () => {
+    const login = localStorage.getItem('userInfo');
+    const temp = JSON.parse(login)
     return temp?.login?.name;
   }
 
-  const { loading, error, refetch } = useQuery(LISTEMPLOYEE, {
+  const { refetch } = useQuery(LISTEMPLOYEE, {
     context: {
       headers: {
         Authorization:  getToken(),
@@ -39,7 +42,14 @@ const Register = () => {
     },
     onCompleted: (data) => {
       setEmployeeRegister(data?.listEmployeeRegister);
-    }
+    },
+    onError: (err) => {
+      const invalidToken = verifyToken(getToken());
+      if (invalidToken) {
+        localStorage.removeItem('userInfo');
+        history.push("/login");
+      }
+    },
   });
 
   useEffect(() => {

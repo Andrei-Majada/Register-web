@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Switch,
   Route,
-  Redirect,
   useLocation,
   useHistory,
+  Redirect,
 } from 'react-router-dom';
 
 import { PageWrapper, ContentWrapper } from './styled';
@@ -59,6 +59,7 @@ const Routes = () => {
     <Switch>
       {!userInfo && renderPublicRoutes()}
       {userInfo && renderPrivateRoutes()}
+      <Redirect to={'/login'} />
     </Switch>
   );
 };
