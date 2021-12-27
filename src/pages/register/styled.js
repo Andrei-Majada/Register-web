@@ -25,9 +25,6 @@ const Tableheader = styled.div`
 `;
 
 const TableDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   padding: 0 50px 0 50px;
 `;

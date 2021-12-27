@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useMutation } from "@apollo/react-hooks";
 
 import Button from '../button';
+import { CREATEREGISTER } from '../../graphql/mutations';
 
 import {
   ModalAll,
@@ -19,7 +20,33 @@ import {
 
 const ModalRequest = ({
   onClickCloseModal,
+  username,
 }) => {
+  const [timeRegistered, setTimeRegistered] = useState('');
+
+  function getToken() {
+    let login = localStorage.getItem('userInfo');
+    let teste = JSON.parse(login)
+    return `Bearer ` + teste?.login?.token;
+  }
+
+  const [create, { loading, error }] = useMutation(CREATEREGISTER, {
+    context: {
+      headers: {
+        Authorization:  getToken(),
+      }
+    },
+    onCompleted: (data) => {
+      onClickCloseModal();
+    }
+  });
+
+  const handleTime = () => {
+    const newTime = new Date(timeRegistered);
+    const timestamp = newTime.getTime();
+    const timeString = timestamp.toString();
+    create({variables: { timeRegistered: timeString }})
+  }
 
   return (
     <ModalAll>
@@ -30,12 +57,12 @@ const ModalRequest = ({
         <Line />
         <ModalBody>
           <PlaceholderName>Colaborador</PlaceholderName>
-          <NameDisplay>Andrei Majada</NameDisplay>
+          <NameDisplay>{username}</NameDisplay>
           <PlaceholderDateHour>Data/Hora</PlaceholderDateHour>
-          <DateHourDisplay type="datetime-local"></DateHourDisplay>
+          <DateHourDisplay type="datetime-local" onChange={(e) => setTimeRegistered(e.target.value)}></DateHourDisplay>
           <ButtonsContainer>
             <Button
-              onClick={() => {}}
+              onClick={() => handleTime()}
               variant="primary"
             >
               Salvar
@@ -51,10 +78,6 @@ const ModalRequest = ({
       </ModalDisplay>
     </ModalAll>
   );
-};
-
-ModalRequest.propTypes = {
-  onClickCloseModal: PropTypes.func.isRequired,
 };
 
 export default ModalRequest;

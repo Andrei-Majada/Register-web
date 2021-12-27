@@ -5,16 +5,6 @@ const Wrapper = styled.div`
   padding: 50px;
 `;
 
-const ButtonContainer = styled.div`
-  margin-bottom: 40px;
-  justify-content: flex-end;
-  display:flex;
-`;
-
-const ButtonRegister = styled.div`
-  width: 150px;
-`;
-
 const Tableheader = styled.div`
   display: flex;
   align-items: center;
@@ -25,9 +15,6 @@ const Tableheader = styled.div`
 `;
 
 const TableDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   padding: 0 50px 0 50px;
 `;
@@ -44,9 +31,7 @@ const TableColumn = styled.h6`
 
 export {
   Wrapper,
-  ButtonContainer,
   TableDiv,
-  ButtonRegister,
   Tableheader,
   TableColumn,
 };

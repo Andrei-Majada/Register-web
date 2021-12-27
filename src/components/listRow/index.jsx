@@ -11,18 +11,49 @@ import {
   DisplayCode,
 } from './styled';
 
-const ListRow = () => (
-  <Row>
-    <GreenBar />
-    <RowFormat>
-      <Display>
-        <DisplayName>Andrei Majada</DisplayName>
-        <DisplayCode>001</DisplayCode>
-      </Display>
-      <DisplayDate>12/10/19</DisplayDate>
-      <DisplayHour>9:00h</DisplayHour>
-    </RowFormat>
-  </Row>
-);
+const ListRow = ({ register, index }) => {
+  const handleDate = (date) => {
+    const newDate = new Date(parseInt(date));
+    const dateFormatter = `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
+    return dateFormatter;
+  };
+
+  const handleHour = (hour) => {
+    const newHour = new Date(parseInt(hour));
+    let dateFormatter;
+    const hourFormatter = newHour.getHours();
+    const minuteFormatter = newHour.getMinutes();
+    if (minuteFormatter < 10) {
+      dateFormatter = `${hourFormatter}:0${minuteFormatter}`;
+    } else {
+      dateFormatter = `${hourFormatter}:${minuteFormatter}`;
+    }
+    return dateFormatter;
+  };
+
+  const handleIndex = (index) => {
+    let indexFormatted;
+    if (index < 10) {
+      indexFormatted = `00${index + 1}`;
+    } else if (index > 10 && index < 100){
+      indexFormatted = `0${index + 1}`;
+    }
+    return indexFormatted;
+  };
+
+  return (
+    <Row>
+      <GreenBar />
+      <RowFormat>
+        <Display>
+          <DisplayName>{register.username}</DisplayName>
+          <DisplayCode>{handleIndex(index)}</DisplayCode>
+        </Display>
+        <DisplayDate>{handleDate(register.timeRegistered)}</DisplayDate>
+        <DisplayHour>{handleHour(register.timeRegistered)}</DisplayHour>
+      </RowFormat>
+    </Row>
+  );
+}
 
 export default ListRow;

@@ -34,6 +34,19 @@ const MenuItem = styled(Link)`
   }
 `;
 
+const LogoffButtonDiv = styled.div`
+  display: flex;
+  padding: 0 0 40px 40px;
+  position: fixed;
+  bottom: 0;
+`;
+
+const LogoffButton = styled.button`
+  border: none;
+  cursor: pointer;
+  background-color: #FFFFFF;
+`;
+
 const MenuIcon = styled(ReactSVG)`
   height: 24px;
   width: 24px;
@@ -45,4 +58,6 @@ export {
   MenuLogo,
   MenuItem,
   MenuIcon,
+  LogoffButtonDiv,
+  LogoffButton,
 };
