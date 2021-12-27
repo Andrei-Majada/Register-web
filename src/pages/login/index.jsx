@@ -27,12 +27,16 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [login, { loading, error }] = useMutation(LOGIN, {
+  const [login] = useMutation(LOGIN, {
     variables: { email: email, password: password },
     onCompleted: (data) => {
       localStorage.removeItem('userInfo');
       setUserInfo(data);
-      history.push("/dashboard");
+      if (data?.login?.role === "admin") {
+        history.push("/dashboard");
+      } else {
+        history.push("/meusregistros");
+      }
     }
   });
 

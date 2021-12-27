@@ -20,7 +20,23 @@ const MenuLogo = styled.div`
   background: #FFFFFF;
 `;
 
+const Menu = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const MenuItem = styled(Link)`
+  display: flex;
+  align-items: center;
+  /* padding-left: 4px; */
+  border-radius: 4px;
+  width: 100%;
+  height: 110px;
+  background: #FFFFFF;
+  cursor: pointer;
+`;
+
+const MenuItemDisable = styled.div`
   display: flex;
   align-items: center;
   padding-left: 4px;
@@ -28,10 +44,7 @@ const MenuItem = styled(Link)`
   width: 100%;
   height: 110px;
   background: #FFFFFF;
-  cursor: pointer;
-  &:hover{
-    background: #4bf492;
-  }
+  cursor: default;
 `;
 
 const LogoffButtonDiv = styled.div`
@@ -53,6 +66,14 @@ const MenuIcon = styled(ReactSVG)`
   padding: 0 0 24px 12px;
 `;
 
+const GreenBar = styled.div`
+  height: 80%;
+  width: 4px;
+  margin: 20px 0 0 0;
+  background: #6FCF97;
+  border-radius: 30px;
+`;
+
 export {
   StyledMenu,
   MenuLogo,
@@ -60,4 +81,7 @@ export {
   MenuIcon,
   LogoffButtonDiv,
   LogoffButton,
+  MenuItemDisable,
+  Menu,
+  GreenBar,
 };

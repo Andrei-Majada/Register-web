@@ -45,7 +45,7 @@ const Routes = () => {
 
   const renderPrivateRoutes = () => (
     <PageWrapper>
-      <LateralMenu />
+      <LateralMenu role={userInfo?.login?.role}/>
       <ContentWrapper>
         {privateRoutes.map((routeConfig) => (
           <Route path={routeConfig.path} component={routeConfig.component} />
@@ -55,20 +55,12 @@ const Routes = () => {
     </PageWrapper>
   );
 
-  useEffect(() => {
-    let login = localStorage.getItem('userInfo');
-    let loginToJson = JSON.parse(login)
-    let token = loginToJson?.login?.token;
-  });
-
   return (
     <Switch>
       {!userInfo && renderPublicRoutes()}
       {userInfo && renderPrivateRoutes()}
-      <Redirect to={userInfo ? '/dashboard' : '/login'} />
     </Switch>
   );
 };
 
 export default Routes;
-export { privateRoutes };

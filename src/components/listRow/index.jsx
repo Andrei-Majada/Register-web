@@ -35,8 +35,8 @@ const ListRow = ({ register, index }) => {
     let indexFormatted;
     if (index < 10) {
       indexFormatted = `00${index + 1}`;
-    } else if (index > 10 && index < 100){
-      indexFormatted = `0${index + 1}`;
+    } else {
+      indexFormatted = `0${index}`;
     }
     return indexFormatted;
   };
